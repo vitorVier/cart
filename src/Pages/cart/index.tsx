@@ -22,39 +22,41 @@ export function Cart() {
             
             {cart.map( (item) => (
                 <section key={item.id} className="flex items-center justify-between border-b2 border-gray-300">
-                <img 
-                    src={item.cover}
-                    alt={item.title}
-                    className="w-28"
-                />
+                    {/* <Link to={`/produto/${cart[item.id].id}`}> */}
+                        <img 
+                            src={item.cover}
+                            alt={item.title}
+                            className="w-28 cursor-pointer"
+                        />
+                    {/* </Link> */}
 
-                <strong>Preço: {item.price}</strong>
+                    <strong className="max-sm:text-sm">Preço: {item.price}</strong>
 
-                <div className="flex items-center justify-center gap-3">
-                    <button 
-                        onClick={() => removeItemCart(item)}
-                        className="bg-slate-500 rounded px-2 text-white font-medium flex items-center justify-center cursor-pointer"
-                    >
-                        -
-                    </button>
+                    <div className="flex items-center justify-center gap-3">
+                        <button 
+                            onClick={() => removeItemCart(item)}
+                            className="bg-slate-500 rounded px-2 text-white font-medium flex items-center justify-center cursor-pointer"
+                        >
+                            -
+                        </button>
 
-                    {item.amount}
+                        {item.amount}
 
-                    <button 
-                        onClick={() => addItemCart(item)}
-                        className="bg-slate-500 rounded px-2 text-white font-medium flex items-center justify-center cursor-pointer"
-                    >
-                        +
-                    </button>
-                </div>
+                        <button 
+                            onClick={() => addItemCart(item)}
+                            className="bg-slate-500 rounded px-2 text-white font-medium flex items-center justify-center cursor-pointer"
+                        >
+                            +
+                        </button>
+                    </div>
 
-                <strong className="float-right">
-                    Sub-total: {item.total.toLocaleString("pt-BR", {
-                    style: "currency",
-                    currency: "BRL"
-                    })}
-                </strong>
-            </section>
+                    <strong className="float-right max-sm:text-sm">
+                        Sub-total: {item.total.toLocaleString("pt-BR", {
+                        style: "currency",
+                        currency: "BRL"
+                        })}
+                    </strong>
+                </section>
             ))}
 
             {cart.length !== 0 && (

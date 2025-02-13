@@ -8,9 +8,11 @@ interface CartContextData {
     addItemCart: (newItem: ProductsProps) => void;
     removeItemCart: (product: CartProps) => void;
     total: string;
+    filterProduct: (product: ProductsProps) => void;
+    produto: ProductsProps[];
 }
 
-interface CartProps {
+export interface CartProps {
     id: number;
     title: string;
     description: string;
@@ -30,6 +32,8 @@ function CartProvider({children}: CartProviderProps) {
 
     const [cart, setCart] = useState<CartProps[]>([]);
     const [total, setTotal] = useState("");
+    const [produto, setProduto] = useState<ProductsProps[]>([]);
+
 
     function addItemCart(newItem: ProductsProps) {
         const indexItem = cart.findIndex(item => item.id === newItem.id)
@@ -85,13 +89,20 @@ function CartProvider({children}: CartProviderProps) {
         setTotal(resultFormated);
     }
 
+    function filterProduct(product: ProductsProps) {
+        const showProduct = product;
+        setProduto(Array(showProduct));
+    }   
+
     return (
         <CartContext.Provider value={{ 
             cart, 
             cartAmount: cart.length,
             addItemCart,
             removeItemCart,
-            total
+            total,
+            filterProduct,
+            produto
         }}>
             {children}
         </CartContext.Provider>
